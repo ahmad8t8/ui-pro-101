@@ -1,25 +1,17 @@
 import {inject, Injectable} from '@angular/core';
-import {catchError, firstValueFrom, Observable, tap, throwError} from 'rxjs';
+import {Observable} from 'rxjs';
 import {User} from '../../../data-layer/service/user/user';
 import {UserService} from '../../../data-layer/service/user/user-service';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserController {
   private userService = inject(UserService);
-  private router = inject(Router);
 
 
-  async getAllUsers(): Promise<User[]> {
-    try {
-      const users = await firstValueFrom(this.userService.getUsers());
-      return users;
-    } catch (err) {
-      console.error('[UserController] Failed to fetch users', err);
-      return []; // safe fallback
-    }
+  getAllUsers(): Observable<User[]> {
+    return this.userService.getUsers();
   }
 
   // async getUserById(id: number): Promise<User | null> {
@@ -31,31 +23,15 @@ export class UserController {
   //   }
   // }
 
-  async createUser(user: User): Promise<User | null> {
-    try {
-      return await firstValueFrom(this.userService.createUser(user));
-    } catch (err) {
-      console.error('[UserController] Failed to create user', err);
-      return null;
-    }
+  createUser(user: User): Observable<User> {
+    return this.userService.createUser(user);
   }
 
-  async updateUser(user: User): Promise<User | null> {
-    try {
-      return await firstValueFrom(this.userService.updateUser(user));
-    } catch (err) {
-      console.error('[UserController] Failed to update user', err);
-      return null;
-    }
+  updateUser(user: User): Observable<User> {
+    return this.userService.updateUser(user);
   }
 
-  async deleteUser(id: number): Promise<boolean> {
-    try {
-      await firstValueFrom(this.userService.deleteUser(id));
-      return true;
-    } catch (err) {
-      console.error(`[UserController] Failed to delete user with id ${id}`, err);
-      return false;
-    }
+  deleteUser(id: number): Observable<void> {
+    return this.userService.deleteUser(id);
   }
 }

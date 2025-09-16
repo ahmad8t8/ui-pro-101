@@ -1,17 +1,16 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {UserListComponent} from '../../view-layer/user-list-component/user-list-component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
-
-  {path: '',
-  loadComponent: () =>
-  import('../../view-layer/user-list-component/user-list-component')
-    .then(m => m.UserListComponent)}
+  {
+    path: '',
+    loadComponent: () => import('../../smart-components/user-list-smart-component/user-list-smart-component').then(u => u.UserListSmartComponent)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {
+}

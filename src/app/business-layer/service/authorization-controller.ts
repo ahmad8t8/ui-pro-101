@@ -9,23 +9,12 @@ import {ErrorHandlerService} from '../../error-handler/service/error-handler-ser
   providedIn: 'root'
 })
 export class AuthorizationController {
-  private errorHandler = inject(ErrorHandlerService);  // ✅
-  constructor(
-    private router:Router,
-    private authService: AuthorizationService,
-    private dataStore: DatastoreService
-  ) {}
+  private errorHandler = inject(ErrorHandlerService);
+  private router = inject(Router);
+  private dataStore = inject(DatastoreService);
+  private authService = inject(AuthorizationService);
 
-  login1(credentials: { username: string; password: string }): Observable<any> {
-    return this.authService.login(credentials).pipe(
-      tap(response => {
-        if (response.access_token) {
-          this.dataStore.setAccessToken(response.access_token);
-        }
-      })
-
-
-    );
+  constructor() {
   }
 
   login(credentials: { username: string; password: string }): Observable<any> {
@@ -33,13 +22,11 @@ export class AuthorizationController {
       tap(response => {
         if (response.access_token) {
           this.dataStore.setAccessToken(response.access_token);
-
-          // ✅ redirect to smart feature (e.g., users list)
-          this.router.navigate(['/user']);
+          this.router.navigate(['/users']);
         }
       }),
       catchError(err => {
-        this.errorHandler.handleError(err);   // central error handling
+        this.errorHandler.handleError(err);
         return throwError(() => err);
       })
     );

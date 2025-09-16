@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {User} from '../../data-layer/service/user/user';
 
 @Component({
   selector: 'app-user-list-component',
-  standalone: false,   // ✅ must be true in standalone setup
   templateUrl: './user-list-component.html',
   styleUrls: ['./user-list-component.scss']
 })

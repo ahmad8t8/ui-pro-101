@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Error } from '../../view-layer/error/error';
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Error} from '../../view-layer/error/error';
 
 
 @NgModule({
@@ -15,4 +14,5 @@ import { Error } from '../../view-layer/error/error';
     Error
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

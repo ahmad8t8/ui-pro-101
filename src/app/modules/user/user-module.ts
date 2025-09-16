@@ -1,20 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { UserRoutingModule } from './user-routing-module';
-import { UserListSmartComponent } from '../../smart-components/user-list-smart-component/user-list-smart-component';
-import { UserListComponent } from '../../view-layer/user-list-component/user-list-component';
+import {UserRoutingModule} from './user-routing-module';
 
 
 @NgModule({
-  declarations: [
-    UserListSmartComponent,
-     UserListComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
-    UserRoutingModule,
-    UserListComponent
+    UserRoutingModule
   ]
 })
-export class UserModule { }
+export class UserModule {
+}

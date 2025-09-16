@@ -1,11 +1,14 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {User} from '../../data-layer/service/user/user';
 import {UserController} from '../../business-layer/service/user/user-controller';
+import {UserListComponent} from '../../view-layer/user-list-component/user-list-component';
 
 @Component({
   selector: 'app-user-list-smart-component',
-  standalone: false,
   templateUrl: './user-list-smart-component.html',
+  imports: [
+    UserListComponent
+  ],
   styleUrl: './user-list-smart-component.scss'
 })
 export class UserListSmartComponent implements OnInit {
@@ -14,22 +17,33 @@ export class UserListSmartComponent implements OnInit {
 
   users: User[] = [];
 
-  async ngOnInit(): Promise<void> {
-    this.users = await this.userController.getAllUsers();
+  ngOnInit() {
+    this.userController.getAllUsers().subscribe((res: User[]) => {
+      this.users = res;
+    });
   }
 
-  async onCreate(user: User) {
-    await this.userController.createUser(user);
-    this.users = await this.userController.getAllUsers();
+  onCreate(user: User) {
+    this.userController.createUser(user).subscribe((user: User) => {
+      this.userController.getAllUsers().subscribe((res: User[]) => {
+        this.users = res;
+      });
+    });
   }
 
-  async onUpdate(user: User) {
-    await this.userController.updateUser(user);
-    this.users = await this.userController.getAllUsers();
+  onUpdate(user: User) {
+    this.userController.updateUser(user).subscribe((user: User) => {
+      this.userController.getAllUsers().subscribe((res: User[]) => {
+        this.users = res;
+      });
+    });
   }
 
-  async onDelete(id: number) {
-    await this.userController.deleteUser(id);
-    this.users = await this.userController.getAllUsers();
+  onDelete(id: number) {
+    this.userController.deleteUser(id).subscribe(() => {
+      this.userController.getAllUsers().subscribe((res: User[]) => {
+        this.users = res;
+      });
+    });
   }
 }
