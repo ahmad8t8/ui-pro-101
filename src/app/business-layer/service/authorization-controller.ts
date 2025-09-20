@@ -20,8 +20,8 @@ export class AuthorizationController {
   login(credentials: { username: string; password: string }): Observable<any> {
     return this.authService.login(credentials).pipe(
       tap(response => {
-        if (response.access_token) {
-          this.dataStore.setAccessToken(response.access_token);
+        if (response!=null) {
+          this.dataStore.setLoginData(response);
           this.router.navigate(['/users']);
         }
       }),

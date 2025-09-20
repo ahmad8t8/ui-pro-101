@@ -1,1 +1,7 @@
-<app-user-list-component [users]="users"></app-user-list-component>
+<app-user-list-component
+  [users]="users"
+  [role]="storeService.getLoginData()?.role"
+  (addUser)="addUserHandler()"
+  (deleteUser)="deleteUserHandler($event)"
+  (updateUser)="updateUserHandler($event)"
+></app-user-list-component>

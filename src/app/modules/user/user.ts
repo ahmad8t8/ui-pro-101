@@ -2,15 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-user',
   imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  templateUrl: './user.html'
 })
-export class App implements OnInit {
+export class User implements OnInit {
   constructor(public router: Router) {
   }
+
   ngOnInit(): void {
-        this.router.navigate(['/login']);
-    }
+    // this.router.navigate(['']);
+  }
 }

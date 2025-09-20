@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
+import {LoginData} from '../business-layer/models/LoginData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatastoreService {
-  private accessToken: string | null = null;
+  private loginData: LoginData | null = null;
 
-  setAccessToken(token: string) {
-    this.accessToken = token;
-    localStorage.setItem('access_token', token);
+  setLoginData(token: LoginData) {
+    this.loginData = token;
+    token.access_token?localStorage.setItem('access_token', token.access_token):null;
+    token.role?localStorage.setItem('role',token.role):null;
   }
 
-  getAccessToken(): string | null {
-    return this.accessToken || localStorage.getItem('access_token');
+  getLoginData(): LoginData | null {
+    return this.loginData || {access_token:localStorage.getItem('access_token'),role:localStorage.getItem('role')};
   }
 
   clearAccessToken() {
-    this.accessToken = null;
+    this.loginData = null;
     localStorage.removeItem('access_token');
   }
 

@@ -1,15 +1,18 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {User} from '../../data-layer/service/user/user';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {User} from '../../business-layer/models/user';
 
 @Component({
   selector: 'app-user-list-component',
   templateUrl: './user-list-component.html',
   styleUrls: ['./user-list-component.scss']
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
+  ngOnInit(): void {
+      console.log("role data ",this.role);
+  }
   @Input() users: User[] = [];
-
-  @Output() deleteUser = new EventEmitter<number>();
+  @Input() role: string | null | undefined;
+  @Output() deleteUser = new EventEmitter<any>();
   @Output() updateUser = new EventEmitter<User>();
   @Output() addUser = new EventEmitter<void>();
 

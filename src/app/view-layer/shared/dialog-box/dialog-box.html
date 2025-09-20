@@ -1,0 +1,17 @@
+<div>
+    <h1 mat-dialog-title>{{matDialogData.dialogTitle}}</h1>
+    <div mat-dialog-content>
+      <p>{{matDialogData.dialogDescription}}
+      </p>
+    </div>
+    <div mat-dialog-actions class="float-end">
+      <button type="button" mat-stroked-button color="primary" (click)="confirmSelection('YES')"
+              class="btnColorClass">
+        YES
+      </button>
+      <button type="button" mat-stroked-button color="primary" (click)="confirmSelection('NO')"
+              class="btnColorClass">
+        NO
+      </button>
+    </div>
+  </div>
